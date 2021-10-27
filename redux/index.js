@@ -2,9 +2,11 @@ import {createWrapper, HYDRATE} from 'next-redux-wrapper';
 import thunk from "redux-thunk";
 import {combineReducers, createStore, applyMiddleware} from "redux";
 
+import {AuthUserReducer} from './reducers'
 
-let rootReducer = combineReducers({
 
+const rootReducer = combineReducers({
+  auth : AuthUserReducer,
 })
 
 // create your reducer
