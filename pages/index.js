@@ -1,8 +1,11 @@
+import MyLauout from "../layouts/MyLayout"
 
 export default function Home() {
   return (
-    <div>
-      Home
-    </div>
+    <MyLauout>
+          <div>
+            Home
+          </div>
+    </MyLauout>
   )
 }
