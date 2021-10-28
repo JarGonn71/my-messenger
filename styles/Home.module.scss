@@ -1,0 +1,21 @@
+.Home{
+    $self:&;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &__container{
+        width: 1500px;
+        height: 750px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.445);
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: 1fr;
+        overflow: hidden;
+    }
+
+}
