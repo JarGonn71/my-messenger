@@ -1,7 +1,7 @@
 const SET_USER = 'SET_USER'
 
 const initialstate = {
-    auth: false,
+    auth: true,
     name: '',
     avatar: ''
 }

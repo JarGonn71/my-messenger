@@ -7,7 +7,7 @@ const MyLauout = ({title='Next | Messenger', children }) => {
             <Head>
                 <title>{title}</title>
             </Head>
-            <main >
+            <main className="App">
                 {children}
             </main>
         </>
