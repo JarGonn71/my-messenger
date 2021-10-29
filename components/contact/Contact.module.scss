@@ -1,0 +1,62 @@
+.Contact{
+    $self:&;
+    display: flex;
+    height: 100px;
+    width: 273px;
+    background: #4AC29A;
+    background: -webkit-linear-gradient(to right, #BDFFF3, #4AC29A);  
+    background: linear-gradient(to right, #BDFFF3, #4AC29A);
+    border-radius: 30px;
+    padding: 10px;
+    margin: 1rem;
+    box-shadow: 0px 4px 7px 0px #00000094;
+    transition: .5s ease-in-out;
+    position: relative;
+
+    svg{
+        font-size: 26px;
+        position: absolute;
+        top: 7%;
+        right: 7%;
+        color: white;
+        opacity: .5;
+        transition: .2s ease-in-out;
+        cursor: pointer;
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+    &:hover{
+        transform: translateY(-5px);
+        box-shadow: 0px 6px 6px 2px #00000094;
+    }
+
+    &__img{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 23px;
+        overflow: hidden;
+        img{
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    &__info{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        margin-left: 1rem;
+        align-items: center;
+    }
+    &__name{
+        font-size: 22px;
+        color: white;
+    }
+    &__status{
+        opacity: .7;
+    }
+}

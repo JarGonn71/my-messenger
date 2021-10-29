@@ -7,6 +7,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-family: 'Nunito', sans-serif;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 a {
@@ -23,6 +26,41 @@ a {
   height: 100%;
   display: flex;
   justify-content: center;
+
+  .wrapper{
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .container{
+        width: 1500px;
+        height: 750px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.445);
+        display: grid;
+        grid-template-columns: minmax(285px, 1fr) 3fr;
+        grid-template-rows: 1fr;
+        overflow: hidden;
+        // animation: showContainer .5s ease-in-out;
+    }
+
+  }
+}
+
+@keyframes showContainer{
+  0%{
+      opacity: 0;
+      transform: scale(.7);
+      
+
+  }
+  100%{
+      opacity: 1;
+      transform: scale(1);
+  }
 }
 
 
@@ -37,7 +75,7 @@ a {
         &.Mui-focused{
             background: rgba(0, 0, 0, 0.07);
             svg{
-                color: cyan;
+                color: #00d4ff;
                 opacity: 1 !important;
             }
         }
@@ -56,4 +94,27 @@ a {
           padding-bottom: 6px;
         }
     }
+}
+
+
+.MuiFormControl-root.MuiTextField-root.textArria.MuiFormControl-fullWidth{
+  .MuiInputLabel-filled{
+    color: white;
+    &.Mui-focused{
+      color: #00d4ff;
+    }
+  }
+  .MuiFilledInput-multiline{
+    color: white;
+
+    textarea{
+      &::-webkit-scrollbar{
+        width: 0px;
+      }
+    }
+
+    &::after{
+      border-bottom: 2px solid #00d4ff;
+    }
+  }
 }

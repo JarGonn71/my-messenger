@@ -1,0 +1,114 @@
+.Dialog{
+    $self: &;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr 110px;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0px 20px;
+    background: rgba(41, 41, 41, 0.925);
+    position: relative;
+
+    &__wrapper{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+        background: transparent;
+        animation: wrapperDialog 1s ease-in-out ;
+    }
+    &__LinkHome{
+        position: absolute;
+        left: 0%;
+        width: 80px;
+        a{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            opacity: 0.6;
+            transition: .3s ease-in-out;
+            &:hover{
+                opacity: 1; 
+                svg:nth-child(n+2){
+                    margin-left: 1rem;
+                }
+            }
+            svg{
+                transition: .3s ease-in-out;
+            }
+            
+        }
+        
+        
+    }
+    &__top{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+       
+        color: white;
+        span{
+            font-size: 16px;
+            opacity: 0.6;
+            position: absolute;
+            right: 2%;
+        }
+    }
+
+    &__chat{
+        position: relative;
+        background: white;
+        border-radius: 5px;
+        overflow: hidden;
+        overflow-y: scroll;
+        &::-webkit-scrollbar{
+            width: 0px;
+        }
+    }
+
+    &__text{
+        position: absolute;
+        top: 45%;
+        text-align: center;
+        width: 100%;
+        font-size: 30px;
+        opacity: 0.6;
+        
+    }
+
+    &__bottom{
+        
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+     
+        padding-bottom: 10px;
+        color: white;
+        button{
+            height: 60px;
+            margin-left: 1rem;
+            background: rgb(99, 196, 2);
+            color: white;
+            &:hover{
+                background: chartreuse;
+            }
+        }
+    }
+
+}
+
+@keyframes wrapperDialog{
+    0%{
+        background: rgba(0, 0, 0, 0.637);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+    }
+    100%{
+        background: transparent;
+        backdrop-filter: blur(0px);
+        z-index: -1;
+    }
+}

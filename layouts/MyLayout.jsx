@@ -1,14 +1,24 @@
 import Head from 'next/head'
 
-const MyLauout = ({title='Next | Messenger', children }) => {
- 
+import {ListMessege} from '../components'
+
+const MyLauout = ({title='Next | Messenger', children, showSidebar=false}) => {
+    console.log(showSidebar)
     return (
         <>
             <Head>
                 <title>{title}</title>
             </Head>
             <main className="App">
-                {children}
+                {
+                    !showSidebar? <>{children}</>
+                    :<div className="wrapper">
+                        <div className="container">
+                            <ListMessege />
+                            {children}
+                        </div>
+                    </div>
+                }
             </main>
         </>
     )
