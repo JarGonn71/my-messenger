@@ -1,21 +1,36 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 import { Button, TextField } from '@material-ui/core';
-
+import { useDispatch } from 'react-redux';
 import styles from './Auth.module.scss'
+import {userRegistation} from '../../redux/reducers/AuthUser'
 
 function FormRegistration({state}) {
+    const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    
+    const onSubmit = (data) => {
+        console.log(data)
+        dispatch(userRegistation({email: data.Email, password: data.Password, name: data.Username}))
+    };
+   
 
     return (
         <form className={state? styles.containerForm: `${styles.containerForm} ${styles.activeR}`} onSubmit={handleSubmit(onSubmit)}>
     
             <TextField  
             className={styles.containerForm__input}
-            label="Логин" 
+            label="Имя" 
             variant="outlined" 
-            {...register("Login", { required: true })}
+            {...register("Username", { required: true })}
+            />
+
+            <TextField  
+            className={styles.containerForm__input}
+            label="Email" 
+            type="email"
+            variant="outlined" 
+            {...register("Email", { required: true })}
             />
 
             <TextField  

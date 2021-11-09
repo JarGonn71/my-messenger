@@ -1,10 +1,21 @@
+import { useEffect } from "react"
 import MyLauout from "../layouts/MyLayout"
+import { useRouter } from "next/router"
 import { Auth } from "../components"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
+
 import styles from "../styles/AuthPage.module.scss"
 
+
 export default function AuthUser() {
-  const {auth} = useSelector(({auth}) => auth)
+  const router = useRouter()
+  const {auth} = useSelector((store) => store);
+
+  useEffect(() => {
+    if(auth.auth){
+      router.push('/')
+    }
+  }, [auth])
 
   return (
     <MyLauout>

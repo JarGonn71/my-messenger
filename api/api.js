@@ -1,4 +1,5 @@
 import * as axios from 'axios'
+import Cookies from 'js-cookie'
 
 const instance = axios.create({
     withCreaentials: true,
@@ -7,7 +8,7 @@ const instance = axios.create({
 })
 
 export const userAPI = {
-    registation(email, password, name, avatar){
+    registation(email, password, name, avatar=''){
         return instance.post(`registration/`,
             {
                 email: email,
@@ -29,21 +30,23 @@ export const userAPI = {
         return instance.post(`logout/`)
     },
     refresh(){
-        return instance.get(`refresh/`)
+        return instance.get(`refresh/`, {
+            refresh: Cookies.get('refresh')
+        })
     },
 
 
     me(){
         return instance.get(`me/`, {
             headers: {
-              'x-access-token': 'token-value'
+                "Authorization" : `JWT ${Cookies.get('Token')}`
             }
         })
     },
     users(){
         return instance.get(`users/`, {
             headers: {
-              'x-access-token': 'token-value'
+                "Authorization" : `JWT ${Cookies.get('Token')}`
             }
         })
     },
@@ -58,7 +61,7 @@ export const dialogAPI = {
         },
         {
             headers: {
-                "x-access-token": "token-value",
+                "Authorization" : `JWT ${Cookies.get('Token')}`
             },
         }
     )},
@@ -67,7 +70,7 @@ export const dialogAPI = {
         return instance.get(`dialog/${id_dialog}`,
         {
             headers: {
-                "x-access-token": "token-value",
+                "Authorization" : `JWT ${Cookies.get('Token')}`
             },
         }
     )},
@@ -76,7 +79,7 @@ export const dialogAPI = {
         return instance.get(`dialogs`,
         {
             headers: {
-                "x-access-token": "token-value",
+                "Authorization" : `JWT ${Cookies.get('Token')}`
             },
         }
     )},

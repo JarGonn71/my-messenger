@@ -1,12 +1,20 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
-
+import {userLogin} from '../../redux/reducers/AuthUser'
+import { useDispatch } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
 import styles from './Auth.module.scss'
 
+
+
 function FormLogin({state}) {
+    const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    
+    const onSubmit = (data) => {
+        console.log(data)
+        dispatch(userLogin({email: data.Email, password: data.Password}))
+    };
   
     return (
       
@@ -14,9 +22,10 @@ function FormLogin({state}) {
     
             <TextField  
             className={styles.containerForm__input}
-            label="Логин" 
+            label="Email" 
             variant="outlined" 
-            {...register("Login", { required: true })}
+            type="Email" 
+            {...register("Email", { required: true })}
             />
 
             <TextField  
