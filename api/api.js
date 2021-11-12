@@ -1,5 +1,7 @@
 import * as axios from 'axios'
-import Cookies from 'js-cookie'
+import { parseCookies} from 'nookies'
+const {Token} = parseCookies( 'Token')
+
 
 const instance = axios.create({
     withCreaentials: true,
@@ -30,23 +32,31 @@ export const userAPI = {
         return instance.post(`logout/`)
     },
     refresh(){
-        return instance.get(`refresh/`, {
-            refresh: Cookies.get('refresh')
-        })
+        return instance.get(`refresh/`, { withCredentials: true } )
     },
 
 
     me(){
+        console.log(Token)
         return instance.get(`me/`, {
             headers: {
-                "Authorization" : `JWT ${Cookies.get('Token')}`
+                "Authorization" : `JWT ${Token}`
             }
         })
     },
+
+    getUser(id){
+        return instance.get(`user/${id}`, {
+            headers: {
+                "Authorization" : `JWT ${Token}`
+            }
+        })
+    },
+
     users(){
         return instance.get(`users/`, {
             headers: {
-                "Authorization" : `JWT ${Cookies.get('Token')}`
+                "Authorization" : `JWT ${Token}`
             }
         })
     },
@@ -61,7 +71,7 @@ export const dialogAPI = {
         },
         {
             headers: {
-                "Authorization" : `JWT ${Cookies.get('Token')}`
+                "Authorization" : `JWT ${Token}`
             },
         }
     )},
@@ -70,7 +80,7 @@ export const dialogAPI = {
         return instance.get(`dialog/${id_dialog}`,
         {
             headers: {
-                "Authorization" : `JWT ${Cookies.get('Token')}`
+                "Authorization" : `JWT ${Token}`
             },
         }
     )},
@@ -79,7 +89,7 @@ export const dialogAPI = {
         return instance.get(`dialogs`,
         {
             headers: {
-                "Authorization" : `JWT ${Cookies.get('Token')}`
+                "Authorization" : `JWT ${Token}`
             },
         }
     )},

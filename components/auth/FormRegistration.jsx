@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Button, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import styles from './Auth.module.scss'
-import {userRegistation} from '../../redux/reducers/AuthUser'
+
 
 function FormRegistration({state}) {
     const dispatch = useDispatch()
@@ -11,7 +11,7 @@ function FormRegistration({state}) {
     
     const onSubmit = (data) => {
         console.log(data)
-        dispatch(userRegistation({email: data.Email, password: data.Password, name: data.Username}))
+        // dispatch(userRegistation({email: data.Email, password: data.Password, name: data.Username}))
     };
    
 

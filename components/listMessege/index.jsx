@@ -6,10 +6,10 @@ import {useRouter} from 'next/router'
 
 import styles from './ListMessege.module.scss'
 
-function ListMessege() {
+function ListMessege({dataDialogs=[]}) {
     const router = useRouter()
     const [showSidebar, setShowSidebar] = useState(false)
-    
+    console.log('dialogs : ', dataDialogs )
     const list = [
         {
             id: 1,
@@ -36,90 +36,6 @@ function ListMessege() {
             }
         },
         {
-            id: 3,
-            name:'Tod',
-            avatar: 'https://www.ejin.ru/wp-content/uploads/2018/10/crew4_1024.png',
-            active: true,
-            lastMessege:{ 
-                text: 'hi',
-                time: '11:30',
-                isMe: true,
-                isRead: true
-            }
-        },
-        {
-            id: 4,
-            name:'Tom',
-            avatar: 'https://placepic.ru/wp-content/uploads/2021/02/kinopoisk_ru_Brad_Pi-41.jpg',
-            active: false,
-            lastMessege:{ 
-                text: 'Treee',
-                time: '1д',
-                isMe: false,
-                isRead: false
-            }
-        },
-        {
-            id: 5,
-            name:'Tod',
-            avatar: 'https://www.ejin.ru/wp-content/uploads/2018/10/crew4_1024.png',
-            active: true,
-            lastMessege:{ 
-                text: 'hi',
-                time: '11:30',
-                isMe: true,
-                isRead: true
-            }
-        },
-        {
-            id: 6,
-            name:'Tom',
-            avatar: 'https://placepic.ru/wp-content/uploads/2021/02/kinopoisk_ru_Brad_Pi-41.jpg',
-            active: false,
-            lastMessege:{ 
-                text: 'Treee',
-                time: '1д',
-                isMe: false,
-                isRead: false
-            }
-        },
-        {
-            id: 7,
-            name:'Tod',
-            avatar: 'https://www.ejin.ru/wp-content/uploads/2018/10/crew4_1024.png',
-            active: true,
-            lastMessege:{ 
-                text: 'hi',
-                time: '11:30',
-                isMe: true,
-                isRead: true
-            }
-        },
-        {
-            id: 8,
-            name:'Tom',
-            avatar: 'https://placepic.ru/wp-content/uploads/2021/02/kinopoisk_ru_Brad_Pi-41.jpg',
-            active: false,
-            lastMessege:{ 
-                text: 'Treee',
-                time: '1д',
-                isMe: false,
-                isRead: false
-            }
-        },
-        {
-            id: 9,
-            name:'Tod',
-            avatar: 'https://www.ejin.ru/wp-content/uploads/2018/10/crew4_1024.png',
-            active: true,
-            lastMessege:{ 
-                text: 'hi',
-                time: '11:30',
-                isMe: true,
-                isRead: true
-            }
-        },
-        {
             id: 10,
             name:'Tom',
             avatar: 'https://placepic.ru/wp-content/uploads/2021/02/kinopoisk_ru_Brad_Pi-41.jpg',
@@ -133,7 +49,7 @@ function ListMessege() {
         },
     ]
 
-    const messegeList = list.map((item, index) => {return <ListMessegeItem key={index} {...item} activeId={router.query.id} />})
+    const messegeList = dataDialogs.map((item, index) => {return <ListMessegeItem key={index} {...item} activeId={router.query.id} />})
 
     return (
         <div className={styles.wrapper}>

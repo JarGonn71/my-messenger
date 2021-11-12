@@ -1,9 +1,19 @@
 import React from 'react';
-import {wrapper} from '../redux';
 import '../styles/globals.scss'
+import { useEffect } from "react"
+import { useSelector, useDispatch, Provider } from "react-redux"
+import {store} from '../redux/store'
 
-const MyApp = ({Component, pageProps}) => (
-    <Component {...pageProps} />
-);
+const MyApp = ({Component, pageProps}) => {
 
-export default wrapper.withRedux(MyApp);
+    return(
+        <Provider store={store}>
+            <Component {...pageProps} />
+        </Provider>
+      
+    );
+}
+ 
+
+export default MyApp;
+

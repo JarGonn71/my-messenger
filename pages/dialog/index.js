@@ -1,6 +1,10 @@
 import MyLauout from '../../layouts/MyLayout'
 import { Dialog } from '../../components'
 import {useRouter} from 'next/router'
+import {userAPI} from '../../api/api'
+import { useEffect } from 'react'
+
+
 
 const item = {
     name: "Tod",
@@ -10,11 +14,7 @@ const item = {
 
 function CreateDialog() {
     const router = useRouter()
-    //async f, create dialog and new messege, router.push(/dialog/id_newdialog)
-    const onSubmit =  (text) =>{
-        console.log({messege: text})
-        router.push('/dialog/1')
-    }
+
 
     return (
         <MyLauout showSidebar={true}>

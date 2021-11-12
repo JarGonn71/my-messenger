@@ -9,13 +9,7 @@ import styles from "../styles/AuthPage.module.scss"
 
 export default function AuthUser() {
   const router = useRouter()
-  const {auth} = useSelector((store) => store);
-
-  useEffect(() => {
-    if(auth.auth){
-      router.push('/')
-    }
-  }, [auth])
+  // console.log('render Auth')
 
   return (
     <MyLauout>

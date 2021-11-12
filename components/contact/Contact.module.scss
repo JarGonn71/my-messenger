@@ -28,7 +28,7 @@
     }
 
     &:hover{
-        transform: translateY(-5px);
+        // transform: translateY(-5px) ;
         box-shadow: 0px 6px 6px 2px #00000094;
     }
 
@@ -58,5 +58,25 @@
     }
     &__status{
         opacity: .7;
+    }
+
+    &__window{
+        position: absolute;
+        width: 300px;
+        height: 100px;
+        border-radius: 30px;
+        background: white;
+        box-shadow: 0px 0px 4px 0px black;
+        display: grid;
+        z-index: 100;
+        box-sizing: content-box;
+        padding: 20px;
+        span{
+            text-align: center;
+        }
+    }
+    &__textArria{
+        display: flex;
+        align-items: flex-end;
     }
 }
