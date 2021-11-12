@@ -10,7 +10,8 @@ const instance = axios.create({
 })
 
 export const userAPI = {
-    registation(email, password, name, avatar=''){
+    registation(email, password, name, avatar="new avatar"){
+        console.log('API: ', email, password, name)
         return instance.post(`registration/`,
             {
                 email: email,

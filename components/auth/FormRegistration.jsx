@@ -1,28 +1,47 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useForm } from "react-hook-form";
 import { Button, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import styles from './Auth.module.scss'
+import Alert from '@material-ui/lab/Alert';
 
+
+import { setCookie } from 'nookies'
+import {setUserData} from '../../redux/slices/user'
+import {userAPI} from '../../api/api'
 
 function FormRegistration({state}) {
+    const [errorMessage, setErrorMessage] = useState(false)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm();
     
-    const onSubmit = (data) => {
-        console.log(data)
-        // dispatch(userRegistation({email: data.Email, password: data.Password, name: data.Username}))
+    const onSubmit = async (dto) => {
+        console.log(dto)
+        try {
+            const {data} = await userAPI.registation(dto.email, dto.password, dto.username)
+            setCookie(null, 'Token', data.accessToken)
+            setCookie(null, 'refreshToken', data.refreshToken)
+            console.log(data)
+            setErrorMessage('')
+            dispatch(setUserData(data.user))
+        } catch (error) {
+            console.warn('Register error', error)
+            setErrorMessage(error.response.data.message)
+        }
+        
     };
    
 
     return (
         <form className={state? styles.containerForm: `${styles.containerForm} ${styles.activeR}`} onSubmit={handleSubmit(onSubmit)}>
-    
+            
+            {errorMessage && <Alert className={styles.containerForm__alert} severity="error">{errorMessage}</Alert>}
+
             <TextField  
             className={styles.containerForm__input}
             label="Имя" 
             variant="outlined" 
-            {...register("Username", { required: true })}
+            {...register("username", { required: true })}
             />
 
             <TextField  
@@ -30,7 +49,7 @@ function FormRegistration({state}) {
             label="Email" 
             type="email"
             variant="outlined" 
-            {...register("Email", { required: true })}
+            {...register("email", { required: true })}
             />
 
             <TextField  
@@ -38,7 +57,7 @@ function FormRegistration({state}) {
             label="Пороль" 
             variant="outlined"
             type="password" 
-            {...register("Password", { required: true })}
+            {...register("password", { required: true })}
             />
             
             <TextField  
@@ -46,10 +65,10 @@ function FormRegistration({state}) {
             label="Повторите пороль" 
             variant="outlined"
             type="password" 
-            {...register("CopyPassword", { required: true })}
+            {...register("copyPassword", { required: true })}
             />
 
-            {errors.Password || errors.Login ? <span className={styles.containerForm__error} >Заполните все поля</span>: null}
+            {errors.password || errors.login ? <span className={styles.containerForm__error} >Заполните все поля</span>: null}
 
             <Button  className={styles.containerForm__submit_R}  type="submit" variant="outlined">Зарегистрироваться</Button>
         </form>

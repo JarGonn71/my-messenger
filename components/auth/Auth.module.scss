@@ -35,6 +35,8 @@
         justify-content: center;
         align-items: center;
         margin-top: 10%;
+        position: relative;
+
         .activeR{
             animation: showFormR .5s ease-in-out;
         }
@@ -49,6 +51,11 @@
             flex-direction: column;
             width: 80%;
             height: 100%;
+            &__alert{
+                position: absolute;
+                top: -60px;
+                width: 80%;
+            }
             &__input{
                 margin: 1rem 0;
             }   

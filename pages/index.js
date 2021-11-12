@@ -3,7 +3,8 @@ import { useEffect } from "react"
 import { TextField } from '@material-ui/core';
 import { Contact } from "../components";
 import { useSelector, useDispatch } from "react-redux"
-import { parseCookies, setCookie, destroyCookie } from 'nookies'
+
+
 
 
 import styles from '../styles/Home.module.scss'
@@ -28,4 +29,3 @@ export default function Home({users=[]}) {
     </MyLauout>
   )
 }
-
