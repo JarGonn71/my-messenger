@@ -1,6 +1,6 @@
 import * as axios from 'axios'
 import { parseCookies} from 'nookies'
-const {Token} = parseCookies( 'Token')
+const BrauserCookies = parseCookies( 'Token')
 
 
 const instance = axios.create({
@@ -10,9 +10,9 @@ const instance = axios.create({
 })
 
 export const userAPI = {
-    registation(email, password, name, avatar="new avatar"){
+    async registation(email, password, name, avatar="new avatar"){
         console.log('API: ', email, password, name)
-        return instance.post(`registration/`,
+        const {data} = await instance.post(`registration/`,
             {
                 email: email,
                 password: password,
@@ -20,52 +20,71 @@ export const userAPI = {
                 avatar: avatar  //random backgraunt-color
             }
         )
+        return data
     },
-    login(email, password){
-        return instance.post(`login/`,
+    async login(email, password){
+        const {data} = await instance.post(`login/`,
             {
                 email: email,
                 password: password,
             }
         )
+        return data
     },
-    logout(){
-        return instance.post(`logout/`)
+    async logout(){
+        const {data} = await instance.post(`logout/`)
     },
-    refresh(){
-        return instance.get(`refresh/`, { withCredentials: true } )
+    async refresh(){
+        const {data} = await instance.get(`refresh/`, { withCredentials: true } )
+        return data
     },
 
 
-    me(){
-        console.log(Token)
-        return instance.get(`me/`, {
+    async me(Token=BrauserCookies.Token){
+        // console.log(Token)
+        const {data} = await instance.get(`me/`, {
             headers: {
                 "Authorization" : `JWT ${Token}`
             }
         })
+        return data
     },
 
-    getUser(id){
-        return instance.get(`user/${id}`, {
+    async getUser(id){
+        const {data} = await instance.get(`user/${id}`, {
             headers: {
                 "Authorization" : `JWT ${Token}`
             }
         })
+        return data
     },
 
-    users(){
-        return instance.get(`users/`, {
+    async users(Token=BrauserCookies.Token){
+        const {data} = await instance.get(`users/`, {
             headers: {
                 "Authorization" : `JWT ${Token}`
             }
         })
+        return data
+    },
+
+    async searchUsers(search, Token=BrauserCookies.Token){
+        const {data} = await instance.post(`serch-user/`, 
+        {
+            search: search, 
+        },    
+        {
+            headers: {
+                "Authorization" : `JWT ${Token}`
+            }
+        })
+        return data
     },
 }
 
 export const dialogAPI = {
-    createDialog(partner, message){
-        return instance.post(`create-dialog/`,
+    async createDialog(partner, message){
+        const {data} = await instance.post(`create-dialog/`,
         {
             partner: partner, 
             message: message
@@ -74,25 +93,41 @@ export const dialogAPI = {
             headers: {
                 "Authorization" : `JWT ${Token}`
             },
-        }
-    )},
+        })
+        return data
+    },
 
-    openDialig(id_dialog){
-        return instance.get(`dialog/${id_dialog}`,
+    async openDialig(id_dialog){
+        const {data} = await instance.get(`dialog/${id_dialog}`,
         {
             headers: {
                 "Authorization" : `JWT ${Token}`
             },
-        }
-    )},
+        })
+        return data
+    },
 
-    getAllDialogs(){
-        return instance.get(`dialogs`,
+    async getAllDialogs(Token=BrauserCookies.Token){
+        const {data} = await instance.get(`dialogs`,
         {
             headers: {
                 "Authorization" : `JWT ${Token}`
             },
-        }
-    )},
+        })
+        return data
+    },
+
+    async getSearchDialogs(search, Token=BrauserCookies.Token){
+        const {data} = await instance.post(`serch-dialog`,
+        {
+            search: search, 
+        },
+        {
+            headers: {
+                "Authorization" : `JWT ${Token}`
+            },
+        })
+        return data
+    },
 
 }

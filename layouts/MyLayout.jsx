@@ -7,7 +7,6 @@ import {ListMessege} from '../components'
 
 const MyLauout = ({title='Next | Messenger', children, showSidebar=false}) => {
     const router = useRouter()
-    const dialogs=[]
     
     return (
         <>
@@ -19,7 +18,7 @@ const MyLauout = ({title='Next | Messenger', children, showSidebar=false}) => {
                     !showSidebar? <>{children}</>
                     :<div className="wrapper">
                         <div className="container">
-                            <ListMessege dataDialogs={dialogs}/>
+                            <ListMessege/>
                             {children}
                         </div>
                     </div>

@@ -1,55 +1,50 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { TextField, InputAdornment } from '@material-ui/core';
 import {BiTag, BiEdit, BiMenu} from 'react-icons/bi'
 import ListMessegeItem from './ListMessegeItem';
 import {useRouter} from 'next/router'
-
+import {useSelector, useDispatch} from 'react-redux'
 import styles from './ListMessege.module.scss'
 
-function ListMessege({dataDialogs=[]}) {
-    const router = useRouter()
-    const [showSidebar, setShowSidebar] = useState(false)
-    console.log('dialogs : ', dataDialogs )
-    const list = [
-        {
-            id: 1,
-            name:'Tod',
-            avatar: 'https://www.ejin.ru/wp-content/uploads/2018/10/crew4_1024.png',
-            active: true,
-            lastMessege:{ 
-                text: 'hi',
-                time: '11:30',
-                isMe: true,
-                isRead: true
-            }
-        },
-        {
-            id: 2,
-            name:'Tom',
-            avatar: 'https://placepic.ru/wp-content/uploads/2021/02/kinopoisk_ru_Brad_Pi-41.jpg',
-            active: false,
-            lastMessege:{ 
-                text: 'Treee',
-                time: '1д',
-                isMe: false,
-                isRead: false
-            }
-        },
-        {
-            id: 10,
-            name:'Tom',
-            avatar: 'https://placepic.ru/wp-content/uploads/2021/02/kinopoisk_ru_Brad_Pi-41.jpg',
-            active: false,
-            lastMessege:{ 
-                text: 'Treee',
-                time: '1д',
-                isMe: false,
-                isRead: false
-            }
-        },
-    ]
+import {dialogAPI} from '../../api/api'
+import {setDialogsData} from '../../redux/slices/user'
 
-    const messegeList = dataDialogs.map((item, index) => {return <ListMessegeItem key={index} {...item} activeId={router.query.id} />})
+function ListMessege() {
+    const router = useRouter()
+    const dispatch = useDispatch()
+    const {dialogs} = useSelector((state) => state.user)
+    const [showSidebar, setShowSidebar] = useState(false)
+    const [valueSearch, setValueSearch] = useState('')
+
+    const messegeList = dialogs.map((item, index) => {return <ListMessegeItem key={index} {...item} activeId={router.query.id} />})
+
+
+    useEffect(async () => {
+        if(valueSearch === ''){
+          try {
+            const {dialogList} = await dialogAPI.getAllDialogs()
+            dispatch(setDialogsData(dialogList))
+          } catch (error) {
+            console.warn(error)
+          }
+        }
+      }, [valueSearch])
+    
+      const handleChange = (e) =>{
+        setValueSearch(e.target.value)
+      } 
+    
+      const handleKeyDown = async (e) => {
+        try {
+          if(e.key === 'Enter'){
+            const {dialogData} = await dialogAPI.getSearchDialogs(valueSearch)
+            dispatch(setDialogsData(dialogData))
+            console.log(data)
+        }
+        } catch (error) {
+            console.warn(error)
+        }
+      }
 
     return (
         <div className={styles.wrapper}>
@@ -67,6 +62,9 @@ function ListMessege({dataDialogs=[]}) {
                     fullWidth
                     variant="filled"
                     size="small"
+                    value={valueSearch} 
+                    onKeyDown={handleKeyDown} 
+                    onChange={handleChange}
                     InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">

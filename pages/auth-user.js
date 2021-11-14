@@ -9,6 +9,10 @@ import styles from "../styles/AuthPage.module.scss"
 
 export default function AuthUser() {
   const router = useRouter()
+  const {data} = useSelector(store => store.user)
+  // if (data){
+  //   router.push('/')
+  // }
   // console.log('render Auth')
 
   return (

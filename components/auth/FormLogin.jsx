@@ -8,19 +8,22 @@ import Alert from '@material-ui/lab/Alert';
 import { setCookie } from 'nookies'
 import {setUserData} from '../../redux/slices/user'
 import {userAPI} from '../../api/api'
+import { useRouter } from 'next/router';
 
 function FormLogin({state}) {
     const [errorMessage, setErrorMessage] = useState(false)
     const dispatch = useDispatch()
+    const router = useRouter()
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     const onSubmit = async (dto) => {
         try {
-            const {data} = await userAPI.login(dto.email, dto.password)
+            const data = await userAPI.login(dto.email, dto.password)
             setCookie(null, 'Token', data.accessToken)
             setCookie(null, 'refreshToken', data.refreshToken)
             setErrorMessage('')
             dispatch(setUserData(data.user))
+            router.push('/')
         } catch (error) {
             console.warn('Login error', error)
             setErrorMessage(error.response.data.message)
