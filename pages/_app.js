@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/globals.scss'
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import {store, wrapper} from '../redux/store'
+import {wrapper} from '../redux/store'
 import { setUserData } from "../redux/slices/user";
 
 const MyApp = ({Component, pageProps}) => {
